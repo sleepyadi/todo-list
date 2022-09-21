@@ -31,7 +31,7 @@ class ProjectController {
 
     addProject() {
         // maybe on add button open modal and on modal submit emit event to add the view and project
-        const newProject = new Project('Untilted', this.counter);
+        const newProject = new Project('Untilted', 'proj-' + this.counter);
         this.counter++;
         this.projects.push(newProject);
         const newView =  new ProjectView(newProject);
@@ -41,6 +41,7 @@ class ProjectController {
     selectProject(event) {
         const isProject = event.target.getAttribute('class').includes('project') && event.target.nodeName === 'DIV';
         if (isProject) {
+            // also emit projectSelected event
             this.deselect();
             event.target.classList.add('selected');
         }
