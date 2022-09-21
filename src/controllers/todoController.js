@@ -4,6 +4,7 @@
 // might not even need id's if i make proper use of "selected" tag
 // on project reciever -> populate todos -> sort -> render
 import { Todo } from "../models/todo";
+import { eventManager } from "../utils/eventManager";
 import { TodoView } from "../views/todoView";
 
 class TodoController {
@@ -13,6 +14,7 @@ class TodoController {
         this.counter = this.todos.length;
         this.selectedProject = '';
         this.todoList = document.createElement('div');
+        eventManager.on('selectProject', this.render.bind(this));
     }
 
     init() {
@@ -46,6 +48,12 @@ class TodoController {
                 this.todoList.appendChild(newView.element);
             }
         } 
+    }
+
+    render(project) {
+        console.log('hi this is from selectProject event')
+        this.selectedProject = project;
+        this.todos = project.todos;
     }
 }
 

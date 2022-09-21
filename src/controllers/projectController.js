@@ -2,6 +2,7 @@
 // and also deletion via event delegation
 // not sure wether to use event delegation for selection as well or add that to view itself
 import { Project } from "../models/project";
+import { eventManager } from "../utils/eventManager";
 import { ProjectView } from "../views/projectView";
 
 class ProjectController {
@@ -44,6 +45,9 @@ class ProjectController {
             // also emit projectSelected event
             this.deselect();
             event.target.classList.add('selected');
+            const id = event.target.getAttribute('data-id');
+            const selectedProject = this.getSelectedProject(id);
+            eventManager.emit('selectProject', selectedProject);
         }
         
     }
@@ -53,6 +57,10 @@ class ProjectController {
         projects.forEach((p) => {
             p.classList.remove('selected')
         })
+    }
+
+    getSelectedProject(id) {
+        return this.projects.filter((p) => {return p.id === id;})[0]   
     }
 }
 
