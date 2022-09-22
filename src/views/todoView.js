@@ -4,6 +4,7 @@
 // completed is just a tick input
 // probably could use event delegation for edit and delete on controller 
 // instead of view
+// could just use a on page input for task and project
 
 class TodoView {
     constructor({title, desc, dueDate, priority, completed = false, id}) {
@@ -26,13 +27,15 @@ class TodoView {
 
         const detailsBtn = document.createElement('button');
         detailsBtn.setAttribute('class', 'btn todo__details')
-        
+        detailsBtn.textContent = 'details';
+
         const editBtn = document.createElement('button');
         editBtn.setAttribute('class', 'btn todo__edit')
+        editBtn.textContent = 'edit';
 
         const deleteBtn = document.createElement('button')
         deleteBtn.setAttribute('class', 'btn todo__delete');
-
+        deleteBtn.textContent = 'delete';
 
         const elements = [title, detailsBtn, editBtn, deleteBtn];
 

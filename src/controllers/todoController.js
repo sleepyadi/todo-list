@@ -32,11 +32,14 @@ class TodoController {
 
     addTodo() {
         // could use same idea as proj added with modal and event emit probs
-        const newTodo = new Todo('untitled', 'untitled', '22/1/2022', 5, false , 'todo' + this.counter);
-        this.todos.push(newTodo);
+        if (this.selectedProject) {
+            const newTodo = new Todo('untitled', 'untitled', '22/1/2022', 5, false , 'todo-' + this.counter);
+            this.todos.push(newTodo);
+            this.counter++;
 
-        const newView = new TodoView(newTodo);
-        this.todoList.appendChild(newView.element);
+            const newView = new TodoView(newTodo);
+            this.todoList.appendChild(newView.element);
+        }
     }
 
     renderTodoList() {
@@ -51,9 +54,11 @@ class TodoController {
     }
 
     render(project) {
+        console.log(project);
         console.log('hi this is from selectProject event')
+        // this overwrites the main object, probs should send a copy
         this.selectedProject = project;
-        this.todos = project.todos;
+        this.todos = project.todoList;
     }
 }
 
