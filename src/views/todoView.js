@@ -21,6 +21,11 @@ class TodoView {
 
     get element() {
         // adds listeners and sub elements
+        const todoCheck = document.createElement('input');
+        todoCheck.type = 'checkbox';
+        todoCheck.classList.add('todo__check');
+
+
         const title = document.createElement('p');
         title.textContent = this.title;
         title.classList.add('todo__title');
@@ -37,7 +42,7 @@ class TodoView {
         deleteBtn.setAttribute('class', 'btn todo__delete');
         deleteBtn.textContent = 'delete';
 
-        const elements = [title, detailsBtn, editBtn, deleteBtn];
+        const elements = [todoCheck, title, detailsBtn, editBtn, deleteBtn];
 
         elements.forEach((element) => {
             this.todo.appendChild(element);
