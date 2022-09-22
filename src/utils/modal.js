@@ -4,21 +4,27 @@ class Modal {
     constructor(type, element) {
         this.type = type;
         this._element = document.querySelector(element);
+        this.overlay = document.querySelector('#overlay');
+        this.overlay.addEventListener('click', this.closeModal.bind(this));
         this.formEvent = '';
     }
 
     openModal(msg = '') {
         if (this.type === 'message') {
             this._element.innerHTML = msg;
+        } else if (this.type === 'form') {
+            this.emptyForm(this._element);
         }
         this._element.classList.add('active');
+        this.overlay.classList.add('active');
     }
 
     closeModal() {
+        this._element.classList.remove('active');
+        this.overlay.classList.remove('active');
         if (this.type === 'message') {
             this.innerHTML = '';
         }
-        this._element.classList.remove('active');
     }
 
     setupForm(eventName) {
@@ -31,7 +37,7 @@ class Modal {
     handleForm(e) {
         e.preventDefault();
         // form element logic
-        eventManager.emit(this.formEvent, )
+        eventManager.emit(this.formEvent, 'hi')
     }
 
     fillForm(form, formValues) {
