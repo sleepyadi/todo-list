@@ -22,24 +22,26 @@ class Modal {
         this.overlay.classList.remove('active');
         if (this.type === 'message') {
             this.innerHTML = '';
-        } else if (this.type === 'form') {
-            this.emptyForm(this._element);
         }
     }
 
     setupForm(eventName) {
         if (this.type === 'form') {
             this.formEvent = eventName;
-            this._element.addEventListener('submit', this.handleForm.bind(this));            
+            this._element.addEventListener('submit', this.handleForm.bind(this), {once: true});            
         }
     }
 
     handleForm(e) {
+        // handles form submit
         e.preventDefault();
-        // form element logic
-        //sends todoEdit event
-        eventManager.emit(this.formEvent, 'hi');
+        
+        const fValues = this.getFormValues();
+        const formObject = Object.assign({}, fValues, {id:this.formID});
+        console.log(formObject)
+        eventManager.emit(this.formEvent, formObject);
         this.closeModal();
+        return;
     }
 
     fillForm(formValues) {
@@ -48,21 +50,32 @@ class Modal {
             console.log('not form type');
             return;
         }
-        
+
+        this.formID = formValues.id;
+
         for (let key in formValues) {
             if (key in this._element.elements) {
                 this._element.elements[key].value = formValues[key];
-                console.log(this._element.elements[key].value);
+                // console.log(this._element.elements[key].value);
 
             };
         }
-
+        console.log(formValues);
     }
 
     emptyForm(form) {
-        for (let element of form.elements) {
-            element.value = '';
+        if (this.type === 'form') {
+            form.reset();
         }
+    }
+
+    getFormValues() {
+        // returns form values as object
+        const values = {};
+        for (let key in this._element.elements) {
+            values[key] = this._element.elements[key].value;
+        }
+        return values;
     }
 }
 

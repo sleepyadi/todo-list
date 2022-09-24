@@ -33,13 +33,11 @@ class TodoView {
 
         const title = document.createElement('p');
         title.textContent = this.title;
-        title.name = 'title';
         title.classList.add('todo__title');
 
         const detailsBtn = document.createElement('button');
         detailsBtn.setAttribute('class', 'btn todo__details')
         detailsBtn.textContent = 'details';
-        detailsBtn.name = 'desc';
         detailsBtn.addEventListener('click', this.handleDetails.bind(this));
 
         const dueDate = document.createElement('p');
@@ -74,7 +72,7 @@ class TodoView {
         const modal = new Modal('form', '#edit-todo-modal');
         // fix this
         // on edit btn -> open todo form with values
-        modal.setupForm('editTodo')
+        modal.setupForm('editTodo') // this is adding event listener multiple times
         modal.fillForm(this);
         modal.openModal();
 

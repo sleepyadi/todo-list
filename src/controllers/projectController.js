@@ -12,6 +12,8 @@ class ProjectController {
         this.title = title;
         this.counter = 0;
         this.projectList = document.createElement('div');
+        this.selectedProject = '';
+        eventManager.on('projectUpdated', this.updateProject.bind(this));
     }
 
     init() {
@@ -39,6 +41,8 @@ class ProjectController {
         this.projectList.appendChild(newView.element);
     }
 
+    
+
     selectProject(event) {
         const isProject = event.target.getAttribute('class').includes('project') && event.target.nodeName === 'DIV';
         if (isProject) {
@@ -46,8 +50,8 @@ class ProjectController {
             this.deselect();
             event.target.classList.add('selected');
             const id = event.target.getAttribute('data-id');
-            const selectedProject = this.getSelectedProject(id);
-            eventManager.emit('selectProject', selectedProject);
+            this.selectedProject = this.getSelectedProject(id);
+            eventManager.emit('selectProject', this.selectedProject);
         }
         
     }
@@ -61,6 +65,15 @@ class ProjectController {
 
     getSelectedProject(id) {
         return this.projects.filter((p) => {return p.id === id;})[0]   
+    }
+
+    updateProject(project) {
+        for (let i = 0; i < this.projects.length; i++) {
+            if (this.projects[i].id === project.id) {
+                this.projects[i] = project;
+            }
+        }
+        eventManager.emit('selectProject', this.selectedProject);
     }
 }
 
