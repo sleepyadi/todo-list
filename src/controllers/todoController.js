@@ -33,7 +33,7 @@ class TodoController {
     addTodo() {
         // could use same idea as proj added with modal and event emit probs
         if (this.selectedProject) {
-            const newTodo = new Todo('untitled', 'untitled', '22/1/2022', 5, false , 'todo-' + this.counter);
+            const newTodo = new Todo('untitled', 'untitled', '2022-01-01', 5, false , 'todo-' + this.counter);
             this.todos.push(newTodo);
             this.counter++;
 

@@ -73,7 +73,9 @@ class TodoView {
         // opens modal for form edit with values and emits editTodo on submit
         const modal = new Modal('form', '#edit-todo-modal');
         // fix this
-        modal.setupForm('test')
+        // on edit btn -> open todo form with values
+        modal.setupForm('editTodo')
+        modal.fillForm(this);
         modal.openModal();
 
     }

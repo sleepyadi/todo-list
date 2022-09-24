@@ -12,9 +12,7 @@ class Modal {
     openModal(msg = '') {
         if (this.type === 'message') {
             this._element.innerHTML = msg;
-        } else if (this.type === 'form') {
-            this.emptyForm(this._element);
-        }
+        } 
         this._element.classList.add('active');
         this.overlay.classList.add('active');
     }
@@ -24,6 +22,8 @@ class Modal {
         this.overlay.classList.remove('active');
         if (this.type === 'message') {
             this.innerHTML = '';
+        } else if (this.type === 'form') {
+            this.emptyForm(this._element);
         }
     }
 
@@ -37,31 +37,31 @@ class Modal {
     handleForm(e) {
         e.preventDefault();
         // form element logic
-        eventManager.emit(this.formEvent, 'hi')
+        //sends todoEdit event
+        eventManager.emit(this.formEvent, 'hi');
+        this.closeModal();
     }
 
-    fillForm(form, formValues) {
+    fillForm(formValues) {
         // expects a 1 to 1 mapping of form and  given values
         if (this.type !== 'form') {
             console.log('not form type');
             return;
         }
-        for (let val in formValues) {
-            if (val in form.elements) {
-                form.elements[val] = formValues[val];
-            }
+        
+        for (let key in formValues) {
+            if (key in this._element.elements) {
+                this._element.elements[key].value = formValues[key];
+                console.log(this._element.elements[key].value);
+
+            };
         }
+
     }
 
     emptyForm(form) {
         for (let element of form.elements) {
-            if (element.nodeName === 'INPUT') {
-                if (element.type === 'checkbox') {
-                    element.checked = false;
-                } else {
-                    element.value = '';
-                }
-            }
+            element.value = '';
         }
     }
 }
