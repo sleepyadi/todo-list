@@ -26,6 +26,7 @@ class TodoController {
 
         //event Listeners
         addTodoBtn.addEventListener('click', this.addTodo.bind(this));
+        this.todoList.addEventListener('click', this.handleTodoClick.bind(this));
 
         this.container.appendChild(addTodoBtn);
         this.container.appendChild(this.todoList);
@@ -36,8 +37,8 @@ class TodoController {
         // could use same idea as proj added with modal and event emit probs
         if (this.selectedProject) {
             const newTodo = new Todo('untitled', 'untitled', '2022-01-01', 2, false , 'todo-' + this.counter);
+            this.counter = this.todos.length + 1;
             this.todos.push(newTodo);
-            this.counter++;
 
             const newView = new TodoView(newTodo);
             this.todoList.appendChild(newView.element);
@@ -80,14 +81,13 @@ class TodoController {
                         todo[val] = obj[val];
                     }
                 }
-                continue;
+                break;
             }
         }
 
         // update project and emit projectUpdate event
-        this.renderTodoList();
         this.updateProject();
-        
+        this.renderTodoList();
 
     }
 
@@ -95,6 +95,57 @@ class TodoController {
         this.selectedProject.todoList = [...this.todos];
         eventManager.emit('projectUpdated', this.selectedProject);
     }
+
+    deleteTodo(element) {
+        // get id -> delete view ->
+        const id = element.parentNode.getAttribute('data-id');
+        if (element.parentNode.hasAttribute('class', 'todo')) {
+            element.parentNode.remove();
+        }
+        for (let i = 0; i < this.todos.length; i++) {
+            if (this.todos[i].id === id) {
+                this.todos.splice(i, 1);
+                break;
+            }
+        }
+        this.selectedProject.deleteTodo(id);
+        this.updateProject();
+        this.renderTodoList();
+        
+    }
+
+    updateCheck(element) {
+        // could add a class to parent node for styling
+        const id = element.parentNode.getAttribute('data-id');
+
+        for (let i = 0; i < this.todos.length; i++) {
+            if (this.todos[i].id === id) {
+                this.todos[i].completed = element.checked;
+                break;
+            }
+        }
+        this.updateProject();
+        this.renderTodoList();
+    }
+
+    handleTodoClick(event) {
+        const isDeleteBtn = event.target.getAttribute('class').includes('todo__delete');
+        const isCheckBox = event.target.getAttribute('class').includes('todo__check');
+
+        if (isDeleteBtn) {
+            this.deleteTodo(event.target);
+        } else if (isCheckBox) {
+            this.updateCheck(event.target);
+        }
+    }
 }
 
 export { TodoController }
+
+//TODO
+// add modals or input way for project
+// render project title too on todo page
+// make todo complete and delete button work
+// add styling and images
+// local storage and date functionality (need to read docs) (tough)
+// filter options e_e

@@ -10,7 +10,7 @@ class ProjectController {
         this.container = document.querySelector(element);
         this.projects = [];
         this.title = title;
-        this.counter = 0;
+        this.counter = this.projects.length;
         this.projectList = document.createElement('div');
         this.selectedProject = '';
         eventManager.on('projectUpdated', this.updateProject.bind(this));
@@ -35,7 +35,7 @@ class ProjectController {
     addProject() {
         // maybe on add button open modal and on modal submit emit event to add the view and project
         const newProject = new Project('Untilted', 'proj-' + this.counter);
-        this.counter++;
+        this.counter = this.projects.length + 1;
         this.projects.push(newProject);
         const newView =  new ProjectView(newProject);
         this.projectList.appendChild(newView.element);

@@ -70,8 +70,7 @@ class TodoView {
     handleEdit() {
         // opens modal for form edit with values and emits editTodo on submit
         const modal = new Modal('form', '#edit-todo-modal');
-        // fix this
-        // on edit btn -> open todo form with values
+        
         modal.setupForm('editTodo') // this is adding event listener multiple times
         modal.fillForm(this);
         modal.openModal();

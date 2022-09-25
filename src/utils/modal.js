@@ -38,7 +38,7 @@ class Modal {
         
         const fValues = this.getFormValues();
         const formObject = Object.assign({}, fValues, {id:this.formID});
-        console.log(formObject)
+        // console.log(formObject)
         eventManager.emit(this.formEvent, formObject);
         this.closeModal();
         return;
