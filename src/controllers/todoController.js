@@ -145,7 +145,7 @@ export { TodoController }
 //TODO
 // add modals or input way for project
 // render project title too on todo page
-// make todo complete and delete button work
+// (done) make todo complete and delete button work
 // add styling and images
 // local storage and date functionality (need to read docs) (tough)
 // filter options e_e

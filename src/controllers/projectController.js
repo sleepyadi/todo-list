@@ -19,22 +19,30 @@ class ProjectController {
     init() {
         const titleElement = document.createElement('h2');
         titleElement.textContent = this.title;
+
+        const projectInputDiv = document.createElement('div');
+
+        this.projectInput = document.createElement('input');
+        this.projectInput.placeholder = 'Enter Project Name';
+        projectInputDiv.appendChild(this.projectInput);
+
         const addBtn = document.createElement('button');
         addBtn.textContent = 'Add Project';
-        
+        projectInputDiv.appendChild(addBtn);
 
         // listeners
         addBtn.addEventListener('click', this.addProject.bind(this));
         this.projectList.addEventListener('click', this.selectProject.bind(this));
 
         this.container.appendChild(titleElement);
-        this.container.appendChild(addBtn);
+        this.container.appendChild(projectInputDiv);
         this.container.appendChild(this.projectList);
     }
 
     addProject() {
         // maybe on add button open modal and on modal submit emit event to add the view and project
-        const newProject = new Project('Untilted', 'proj-' + this.counter);
+        const projectName = this.projectInput.value || 'Untitled';
+        const newProject = new Project(projectName, 'proj-' + this.counter);
         this.counter = this.projects.length + 1;
         this.projects.push(newProject);
         const newView =  new ProjectView(newProject);
