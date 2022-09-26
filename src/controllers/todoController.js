@@ -62,8 +62,8 @@ class TodoController {
     }
 
     render(project) {
-        console.log(project);
-        console.log('hi this is from selectProject event')
+        console.log('received in todo',project);
+        console.log('hi this is from selectProject event in todocontroller')
         // this overwrites the main object, probs should send a copy
         this.selectedProject = project;
         this.todos = [...this.selectedProject.todoList];
@@ -149,3 +149,11 @@ export { TodoController }
 // add styling and images
 // local storage and date functionality (need to read docs) (tough)
 // filter options e_e
+
+// some possible bugs
+// what if u delete the selected project -> could sent empty item for 
+// false bool check
+
+//bug to fix 
+// select class being deleted or not added
+// selected class having 2 elements in it somehow asidoaisodi

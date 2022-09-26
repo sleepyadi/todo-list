@@ -1,3 +1,5 @@
+import { Modal } from "../utils/modal";
+
 class ProjectView {
     constructor(project) {
         this.project = project;
@@ -10,12 +12,25 @@ class ProjectView {
 
     get element() {
         // adds listeners and returns the element;
-        this._element.textContent = this.name;
+        const projectName = document.createElement('p');
+        projectName.classList.add('project__title');
+        projectName.textContent = this.name;
+        this._element.appendChild(projectName);
+
+        const editBtn = document.createElement('button');
+        editBtn.classList.add('project__edit');
+        editBtn.textContent = 'edit';
+        editBtn.addEventListener('click', this.handleEdit.bind(this));
+        this._element.appendChild(editBtn);
+
         return this._element;
     }
 
-    select() {
-        // solved via event delegation on controller
+    handleEdit(e) {
+        const modal = new Modal('form', '#edit-project-modal');
+        modal.setupForm('editProject');
+        modal.fillForm(this);
+        modal.openModal();
     }
 }
 

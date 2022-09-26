@@ -60,7 +60,7 @@ class Modal {
 
             };
         }
-        console.log(formValues);
+        
     }
 
     emptyForm(form) {

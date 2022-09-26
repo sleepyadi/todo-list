@@ -12,8 +12,10 @@ class ProjectController {
         this.title = title;
         this.counter = this.projects.length;
         this.projectList = document.createElement('div');
+        this.projectList.classList.add('project-list');
         this.selectedProject = '';
         eventManager.on('projectUpdated', this.updateProject.bind(this));
+        eventManager.on('editProject', this.updateProjectInfo.bind(this));
     }
 
     init() {
@@ -45,24 +47,49 @@ class ProjectController {
         const newProject = new Project(projectName, 'proj-' + this.counter);
         this.counter = this.projects.length + 1;
         this.projects.push(newProject);
-        const newView =  new ProjectView(newProject);
-        this.projectList.appendChild(newView.element);
+
+        this.renderProjects();
+        
+    }
+
+    renderProjects() {
+        // this is resetting the selected class 
+        this.projectList.innerHTML = '';
+        for (let project of this.projects) {
+            const newView =  new ProjectView(project);
+            this.projectList.appendChild(newView.element);
+        }
     }
 
     
 
     selectProject(event) {
-        const isProject = event.target.getAttribute('class').includes('project') && event.target.nodeName === 'DIV';
-        if (isProject) {
-            // also emit projectSelected event
-            this.deselect();
-            event.target.classList.add('selected');
-            const id = event.target.getAttribute('data-id');
-            this.selectedProject = this.getSelectedProject(id);
-            eventManager.emit('selectProject', this.selectedProject);
+        // this is event bubbling from edit btn
+        console.log(event.target);
+        const isProject = event.target.getAttribute('class').includes('project');
+        const hasProjId = event.target.hasAttribute('data-id');
+        const isEditBtn = event.target.getAttribute('class').includes('project__edit');
+        const isTitle =  event.target.getAttribute('class').includes('project__title'); 
+       
+        if (isProject && hasProjId) {
+            console.log('project click')
+            this.selectElement(event.target);
+        } else if (isEditBtn || isTitle) {
+            console.log('child click');
+            this.selectElement(event.target.parentElement);
         }
         
     }
+
+    selectElement(element) {
+        this.deselect();
+        element.classList.add('selected');
+        const id = element.getAttribute('data-id');
+        this.selectedProject = this.getSelectedProject(id);
+        eventManager.emit('selectProject', this.selectedProject);
+        this.renderProjects();
+    }
+
 
     deselect() {
         const projects = Array.from(this.projectList.children);
@@ -81,6 +108,27 @@ class ProjectController {
                 this.projects[i] = project;
             }
         }
+        eventManager.emit('selectProject', this.selectedProject);
+    }
+
+    updateProjectInfo(obj) {
+        console.log(this.projects);
+        console.log(obj);
+        // on project title edit trigger this func
+        for (let project of this.projects) {
+            console.log(project.id);
+            if (project.id === obj.id) {
+                console.log(project.id);
+                for (let val in obj) {
+                    if (val in project) {
+                        project[val] = obj[val];
+                    }
+                }
+                break; // this was breaking the loop ;-;
+            }   
+        }
+        console.log(this.projects);
+        this.renderProjects();
         eventManager.emit('selectProject', this.selectedProject);
     }
 }
