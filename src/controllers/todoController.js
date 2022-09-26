@@ -24,10 +24,12 @@ class TodoController {
         todoInputDiv.classList.add('todo-input-container');
 
         this.todoTitleInput = document.createElement('input');
+        this.todoTitleInput.placeholder = 'Enter Todo Title';
         this.todoTitleInput.classList.add('todo-title-input');
         todoInputDiv.appendChild(this.todoTitleInput);
 
         this.todoDescInput = document.createElement('input');
+        this.todoDescInput.placeholder = 'Enter Todo Details';
         this.todoDescInput.classList.add('todo-desc-input');
         todoInputDiv.appendChild(this.todoDescInput)
 
@@ -171,8 +173,10 @@ class TodoController {
 export { TodoController }
 
 //TODO
-// add modals or input way for project (done)
-// add input for todo
+// maybe add label/tags for todo input
+// make delete project work with event delegation;
+// (done) add modals or input way for project
+// (done) add input for todo 
 // render project title too on todo page
 // (done) make todo complete and delete button work
 // add styling and images
