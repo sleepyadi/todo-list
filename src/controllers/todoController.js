@@ -20,15 +20,38 @@ class TodoController {
     }
 
     init() {
+        const todoInputDiv = document.createElement('div');
+        todoInputDiv.classList.add('todo-input-container');
+
+        this.todoTitleInput = document.createElement('input');
+        this.todoTitleInput.classList.add('todo-title-input');
+        todoInputDiv.appendChild(this.todoTitleInput);
+
+        this.todoDescInput = document.createElement('input');
+        this.todoDescInput.classList.add('todo-desc-input');
+        todoInputDiv.appendChild(this.todoDescInput)
+
+        this.todoDueInput = document.createElement('input');
+        this.todoDueInput.type = 'date';
+        this.todoDueInput.classList.add('todo-duedate-input')
+        todoInputDiv.appendChild(this.todoDueInput);
+
+        this.todoPriorityInput = document.createElement('input');
+        this.todoPriorityInput.type = 'number';
+        this.todoPriorityInput.classList.add('todo-priority-input');
+        this.todoPriorityInput.min = '1';
+        this.todoPriorityInput.max = '3';
+        todoInputDiv.appendChild(this.todoPriorityInput);
+
         const addTodoBtn = document.createElement('button');
         addTodoBtn.textContent = 'Add Todo';
         
-
         //event Listeners
         addTodoBtn.addEventListener('click', this.addTodo.bind(this));
         this.todoList.addEventListener('click', this.handleTodoClick.bind(this));
+        todoInputDiv.appendChild(addTodoBtn);
 
-        this.container.appendChild(addTodoBtn);
+        this.container.appendChild(todoInputDiv);
         this.container.appendChild(this.todoList);
         this.renderTodoList();
     }
@@ -36,7 +59,12 @@ class TodoController {
     addTodo() {
         // could use same idea as proj added with modal and event emit probs
         if (this.selectedProject) {
-            const newTodo = new Todo('untitled', 'untitled', '2022-01-01', 2, false , 'todo-' + this.counter);
+            const todoTitle = this.todoTitleInput.value || 'Untitled';
+            const todoDesc =  this.todoDescInput.value || 'Untitled';
+            const todoDue = this.todoDueInput.value || '2023-03-01';
+            const todoPriority = this.todoPriorityInput.value || 2;
+
+            const newTodo = new Todo(todoTitle, todoDesc, todoDue, todoPriority, false , 'todo-' + this.counter);
             this.counter = this.todos.length + 1;
             this.todos.push(newTodo);
 
