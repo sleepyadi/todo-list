@@ -23,12 +23,15 @@ class ProjectController {
         titleElement.textContent = this.title;
 
         const projectInputDiv = document.createElement('div');
+        projectInputDiv.classList.add('project-input-container')
 
         this.projectInput = document.createElement('input');
+        this.projectInput.classList.add('project-input')
         this.projectInput.placeholder = 'Enter Project Name';
         projectInputDiv.appendChild(this.projectInput);
 
         const addBtn = document.createElement('button');
+        addBtn.setAttribute('class', 'btn add-project-btn');
         addBtn.textContent = 'Add Project';
         projectInputDiv.appendChild(addBtn);
 
@@ -59,8 +62,16 @@ class ProjectController {
             const newView =  new ProjectView(project);
             this.projectList.appendChild(newView.element);
         }
-    }
+        
 
+        for (let pElement of Array.from(this.projectList.children)) {
+            if (pElement.getAttribute('data-id') === this.selectedProject.id) {
+                pElement.classList.add('selected');
+            }            
+        }
+
+    }
+    
     
 
     selectProject(event) {
@@ -112,13 +123,9 @@ class ProjectController {
     }
 
     updateProjectInfo(obj) {
-        console.log(this.projects);
-        console.log(obj);
         // on project title edit trigger this func
         for (let project of this.projects) {
-            console.log(project.id);
             if (project.id === obj.id) {
-                console.log(project.id);
                 for (let val in obj) {
                     if (val in project) {
                         project[val] = obj[val];

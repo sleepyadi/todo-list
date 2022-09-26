@@ -143,7 +143,8 @@ class TodoController {
 export { TodoController }
 
 //TODO
-// add modals or input way for project
+// add modals or input way for project (done)
+// add input for todo
 // render project title too on todo page
 // (done) make todo complete and delete button work
 // add styling and images
@@ -154,6 +155,7 @@ export { TodoController }
 // what if u delete the selected project -> could sent empty item for 
 // false bool check
 
-//bug to fix 
+//bug to fix
+// project name not being edited (fixed);
 // select class being deleted or not added
-// selected class having 2 elements in it somehow asidoaisodi
+// selected class having 2 elements in it somehow (fixed);
