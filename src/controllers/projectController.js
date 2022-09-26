@@ -50,7 +50,6 @@ class ProjectController {
         const newProject = new Project(projectName, 'proj-' + Date.now());
         // this.counter = this.proj/ects.length + 1;
         this.projects.push(newProject);
-
         this.renderProjects();
         
     }
@@ -146,7 +145,7 @@ class ProjectController {
         const id = element.getAttribute('data-id');
         for (let i = 0; i < this.projects.length; i++) {
             if (this.projects[i].id === id) {
-                this.projects.slice(i, 1);
+                this.projects.splice(i, 1);
                 break;
             }
         }
@@ -155,7 +154,6 @@ class ProjectController {
             this.selectedProject = '';
             eventManager.emit('selectProject', this.selectedProject);
         }
-        
     }
 }
 
