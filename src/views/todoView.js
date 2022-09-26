@@ -6,8 +6,8 @@
 // instead of view
 // could just use a on page input for task and project
 // modal for edit button emits todoEdit
-
 import { Modal } from "../utils/modal";
+import {isFuture, isEqual, formatDistanceToNow } from 'date-fns';
 
 class TodoView {
     constructor({title, desc, dueDate, priority, completed = false, id}) {
@@ -41,7 +41,7 @@ class TodoView {
         detailsBtn.addEventListener('click', this.handleDetails.bind(this));
 
         const dueDate = document.createElement('p');
-        dueDate.textContent = 'some days left';
+        dueDate.textContent = this.getTimeMsg();
         dueDate.classList.add('todo__due');
 
         const editBtn = document.createElement('button');
@@ -77,9 +77,14 @@ class TodoView {
 
     }
 
-    handleDelete() {
-        // handled via event delegation probably
-    }
+    getTimeMsg() {
+        const dueDate = new Date(this.dueDate);
+        if (isFuture(dueDate) || isEqual(dueDate, new Date())) {
+            return formatDistanceToNow(dueDate) + ' left';
+        } else {
+            return 'Expired';
+        }
+    }   
 }
 
 

@@ -7,6 +7,7 @@ import { Todo } from "../models/todo";
 import { eventManager } from "../utils/eventManager";
 import { Modal } from "../utils/modal";
 import { TodoView } from "../views/todoView";
+import add from "date-fns/add";
 
 class TodoController {
     constructor(element) {
@@ -35,7 +36,8 @@ class TodoController {
 
         this.todoDueInput = document.createElement('input');
         this.todoDueInput.type = 'date';
-        this.todoDueInput.classList.add('todo-duedate-input')
+        this.todoDueInput.valueAsDate = add(new Date(), { days: 3});
+        this.todoDueInput.classList.add('todo-dueDate-input')
         todoInputDiv.appendChild(this.todoDueInput);
 
         this.todoPriorityInput = document.createElement('input');
@@ -43,6 +45,7 @@ class TodoController {
         this.todoPriorityInput.classList.add('todo-priority-input');
         this.todoPriorityInput.min = '1';
         this.todoPriorityInput.max = '3';
+        this.todoPriorityInput.value = '1';
         todoInputDiv.appendChild(this.todoPriorityInput);
 
         const addTodoBtn = document.createElement('button');
