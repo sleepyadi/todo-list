@@ -23,6 +23,11 @@ class ProjectView {
         editBtn.addEventListener('click', this.handleEdit.bind(this));
         this._element.appendChild(editBtn);
 
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('project__delete');
+        deleteBtn.textContent = 'delete';
+        this._element.appendChild(deleteBtn);
+
         return this._element;
     }
 

@@ -10,7 +10,7 @@ class ProjectController {
         this.container = document.querySelector(element);
         this.projects = [];
         this.title = title;
-        this.counter = this.projects.length;
+        // this.counter = this.projects.length;
         this.projectList = document.createElement('div');
         this.projectList.classList.add('project-list');
         this.selectedProject = '';
@@ -47,8 +47,8 @@ class ProjectController {
     addProject() {
         // maybe on add button open modal and on modal submit emit event to add the view and project
         const projectName = this.projectInput.value || 'Untitled';
-        const newProject = new Project(projectName, 'proj-' + this.counter);
-        this.counter = this.projects.length + 1;
+        const newProject = new Project(projectName, 'proj-' + Date.now());
+        // this.counter = this.proj/ects.length + 1;
         this.projects.push(newProject);
 
         this.renderProjects();
@@ -81,13 +81,16 @@ class ProjectController {
         const hasProjId = event.target.hasAttribute('data-id');
         const isEditBtn = event.target.getAttribute('class').includes('project__edit');
         const isTitle =  event.target.getAttribute('class').includes('project__title'); 
-       
+        const isDeleteBtn = event.target.getAttribute('class').includes('project__delete');
+
         if (isProject && hasProjId) {
             console.log('project click')
             this.selectElement(event.target);
         } else if (isEditBtn || isTitle) {
             console.log('child click');
             this.selectElement(event.target.parentElement);
+        } else if (isDeleteBtn) {
+            this.deleteProject(event.target.parentElement);
         }
         
     }
@@ -137,6 +140,22 @@ class ProjectController {
         console.log(this.projects);
         this.renderProjects();
         eventManager.emit('selectProject', this.selectedProject);
+    }
+
+    deleteProject(element) {
+        const id = element.getAttribute('data-id');
+        for (let i = 0; i < this.projects.length; i++) {
+            if (this.projects[i].id === id) {
+                this.projects.slice(i, 1);
+                break;
+            }
+        }
+        element.remove();
+        if (element.getAttribute('class').includes('selected')) {
+            this.selectedProject = '';
+            eventManager.emit('selectProject', this.selectedProject);
+        }
+        
     }
 }
 

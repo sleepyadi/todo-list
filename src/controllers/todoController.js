@@ -13,7 +13,7 @@ class TodoController {
     constructor(element) {
         this.container = document.querySelector(element);
         this.todos = [];
-        this.counter = this.todos.length;
+        // this.counter = this.todos.length;
         this.selectedProject = '';
         this.todoList = document.createElement('div');
         eventManager.on('selectProject', this.render.bind(this));
@@ -69,8 +69,8 @@ class TodoController {
             const todoDue = this.todoDueInput.value || '2023-03-01';
             const todoPriority = this.todoPriorityInput.value || 2;
 
-            const newTodo = new Todo(todoTitle, todoDesc, todoDue, todoPriority, false , 'todo-' + this.counter);
-            this.counter = this.todos.length + 1;
+            const newTodo = new Todo(todoTitle, todoDesc, todoDue, todoPriority, false , 'todo-' + Date.now());
+            // this.counter = this.todos.length + 1;
             this.todos.push(newTodo);
 
             const newView = new TodoView(newTodo);
@@ -98,8 +98,13 @@ class TodoController {
         console.log('received in todo',project);
         console.log('hi this is from selectProject event in todocontroller')
         // this overwrites the main object, probs should send a copy
-        this.selectedProject = project;
-        this.todos = [...this.selectedProject.todoList];
+        if (project) {
+            this.selectedProject = project;
+            this.todos = [...this.selectedProject.todoList];
+        } else {
+            this.selectedProject = '';
+            this.todos = [];
+        }
         // on render assign project and todos
         // render existing proj and title
         this.renderTodoList();
@@ -183,7 +188,8 @@ export { TodoController }
 // render project title too on todo page
 // (done) make todo complete and delete button work
 // add styling and images
-// local storage and date functionality (need to read docs) (tough)
+// local storage and
+// (done) date functionality (need to read docs) (tough)
 // filter options e_e
 
 // some possible bugs
@@ -192,5 +198,6 @@ export { TodoController }
 
 //bug to fix
 // project name not being edited (fixed);
-// select class being deleted or not added
+// select class being deleted or not added (fixed)
 // selected class having 2 elements in it somehow (fixed);
+// adding project after deleting somehow adding  1 more element
