@@ -7,8 +7,41 @@
     border: 1px solid red;
 }
 
+:root { 
+  font-size: 100%;
+}
 
-/* ---- MODAL ---- */
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "header header"
+                       "sidebar main";
+}
+
+/* -------------- UTILS -------------- */
+
+
+/* -------------- HEADER -------------- */
+header {
+  grid-area: header;
+}
+
+/* -------------- SIDEBAR -------------- */
+.project-sidebar {
+  grid-area: sidebar;
+}
+
+
+/* -------------- MAIN -------------- */
+main {
+  grid-area: main;
+}
+
+
+
+/* -------------- MODAL -------------- */
 
 .modal {
   position: fixed;

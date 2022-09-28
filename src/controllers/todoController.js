@@ -198,7 +198,7 @@ export { TodoController }
 // (done) make delete project work with event delegation;
 // (done) add modals or input way for project
 // (done) add input for todo 
-// render project title too on todo page
+// (done) render project title too on todo page
 // (done) make todo complete and delete button work
 // add styling and images
 // local storage and
