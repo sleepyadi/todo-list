@@ -10,17 +10,23 @@ import { TodoView } from "../views/todoView";
 import add from "date-fns/add";
 
 class TodoController {
-    constructor(element) {
+    constructor(element, title) {
         this.container = document.querySelector(element);
         this.todos = [];
+        this.title = title || "None";
         // this.counter = this.todos.length;
         this.selectedProject = '';
         this.todoList = document.createElement('div');
+        this.todoList.classList.add('todo-list');
         eventManager.on('selectProject', this.render.bind(this));
         eventManager.on('editTodo', this.updateTodo.bind(this));
     }
 
     init() {
+        const titleElement = document.createElement('h2');
+        titleElement.classList.add('controller-title');
+        titleElement.textContent = this.title;
+
         const todoInputDiv = document.createElement('div');
         todoInputDiv.classList.add('todo-input-container');
 
@@ -49,7 +55,8 @@ class TodoController {
         todoInputDiv.appendChild(this.todoPriorityInput);
 
         const addTodoBtn = document.createElement('button');
-        addTodoBtn.textContent = 'Add Todo';
+        addTodoBtn.setAttribute('class', 'btn add-todo-btn');
+        addTodoBtn.textContent = ' + ';
         
         //event Listeners
         addTodoBtn.addEventListener('click', this.addTodo.bind(this));
@@ -60,6 +67,7 @@ class TodoController {
         this.projectTitle.classList.add('selected-project-title');
         this.projectTitle.textContent = "Project Name";
 
+        this.container.appendChild(titleElement);
         this.container.appendChild(todoInputDiv);
         this.container.appendChild(this.projectTitle);
         this.container.appendChild(this.todoList);
@@ -93,7 +101,7 @@ class TodoController {
         if (this.selectedProject) {
             this.projectTitle.textContent = this.selectedProject.name;
         } else {
-            this.projectTitle.textContent = 'Project Name';
+            this.projectTitle.textContent = 'No Project Selected';
         }
 
 
@@ -200,7 +208,7 @@ export { TodoController }
 // (done) add input for todo 
 // (done) render project title too on todo page
 // (done) make todo complete and delete button work
-// add styling and images
+// add styling and images (can do this before local storage probs)
 // local storage and
 // (done) date functionality (need to read docs) (tough)
 // filter options e_e

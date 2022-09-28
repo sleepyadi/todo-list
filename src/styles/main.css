@@ -9,6 +9,15 @@
 
 :root { 
   font-size: 100%;
+  font-family: sans-serif;
+  --main-bg-clr: #FBFCD4;
+  --white: #fff;
+  --hover-gold: #FBC403;
+  --black-clr: #0A0A0A;
+  --transparent-black: rgba(0,0,0,0.9);
+  --medium-black: #292826;
+  --light-black: #151515;
+  --title-gold: #FBC403;
 }
 
 body {
@@ -18,26 +27,179 @@ body {
   grid-template-rows: auto 1fr;
   grid-template-areas: "header header"
                        "sidebar main";
+  grid-gap: 1rem;
 }
 
-/* -------------- UTILS -------------- */
+@media only screen and (max-width: 600px) {
+  body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-areas: "header"
+                         "sidebar"
+                         "main";
+  }
+}
+
+/* -------------- UTILS / Commons -------------- */
+
+.btn {
+  padding: 0.5em 1em;
+  outline: none;
+}
+
+.controller-title {
+  text-align: center;
+  padding: 0.5em 1em;
+  background-color: var(--transparent-black);
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+
+input {
+  padding: 0.5em;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #ececec;
+}
+
+input:focus {
+  outline: 3px solid black;
+}
 
 
 /* -------------- HEADER -------------- */
 header {
   grid-area: header;
+  text-align: center;
+  padding: 1em;
 }
 
 /* -------------- SIDEBAR -------------- */
 .project-sidebar {
   grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: 0 1em;
 }
 
+.project-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.project-input {
+  padding: 0.5em;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #ececec;
+}
+
+.btn.add-project-btn {
+  padding: 0.2em 0.5em;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-top: 3rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1.2em 1em;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.project:hover {  
+  background: rgba(0, 0, 0, 0.2);
+  outline: 2px solid black;
+  cursor: pointer;
+}
+
+.project:hover::before{
+  content: "☛ ";
+  color: #0A0A0A;
+}
+
+.project__edit {
+  margin-left: auto;
+}
+
+.project.selected {
+  transform: scale(1.05);
+  background-color: var(--black-clr);
+  color: var(--title-gold);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 8px 15px;
+
+}
+
+.project.selected::before {
+  font-size: 1.2rem;
+  content: "☛ ";
+  color: var(--title-gold);
+}
 
 /* -------------- MAIN -------------- */
 main {
   grid-area: main;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: 0 1em;
+
 }
+
+.todo-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn.add-todo-btn {
+  padding: 0.2em 0.5em;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.selected-project-title {
+  width: fit-content;
+  align-self: center;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--black-clr);
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+.todo {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 1.2em 1em;
+  align-items: center;
+}
+
+.todo__details {
+  margin-left: auto;
+}
+
 
 
 

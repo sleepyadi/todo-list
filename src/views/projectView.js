@@ -12,7 +12,7 @@ class ProjectView {
 
     get element() {
         // adds listeners and returns the element;
-        const projectName = document.createElement('p');
+        const projectName = document.createElement('h3');
         projectName.classList.add('project__title');
         projectName.textContent = this.name;
         this._element.appendChild(projectName);

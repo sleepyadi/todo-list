@@ -20,6 +20,7 @@ class ProjectController {
 
     init() {
         const titleElement = document.createElement('h2');
+        titleElement.classList.add('controller-title');
         titleElement.textContent = this.title;
 
         const projectInputDiv = document.createElement('div');
@@ -32,7 +33,7 @@ class ProjectController {
 
         const addBtn = document.createElement('button');
         addBtn.setAttribute('class', 'btn add-project-btn');
-        addBtn.textContent = 'Add Project';
+        addBtn.textContent = ' + ';
         projectInputDiv.appendChild(addBtn);
 
         // listeners

@@ -31,7 +31,7 @@ class TodoView {
         todoCheck.classList.add('todo__check');
 
 
-        const title = document.createElement('p');
+        const title = document.createElement('h4');
         title.textContent = this.title;
         title.classList.add('todo__title');
 
