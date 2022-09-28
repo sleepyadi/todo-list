@@ -56,7 +56,12 @@ class TodoController {
         this.todoList.addEventListener('click', this.handleTodoClick.bind(this));
         todoInputDiv.appendChild(addTodoBtn);
 
+        this.projectTitle = document.createElement('h2');
+        this.projectTitle.classList.add('selected-project-title');
+        this.projectTitle.textContent = "Project Name";
+
         this.container.appendChild(todoInputDiv);
+        this.container.appendChild(this.projectTitle);
         this.container.appendChild(this.todoList);
         this.renderTodoList();
     }
@@ -85,6 +90,13 @@ class TodoController {
 
     renderTodoList() {
         // if todo not empty -> sort and render
+        if (this.selectedProject) {
+            this.projectTitle.textContent = this.selectedProject.name;
+        } else {
+            this.projectTitle.textContent = 'Project Name';
+        }
+
+
         this.todoList.innerHTML = '';
         if (this.todos.length >= 1) {
             for (let todo of this.todos) {
@@ -182,7 +194,8 @@ export { TodoController }
 
 //TODO
 // maybe add label/tags for todo input
-// make delete project work with event delegation;
+// (done) priority color
+// (done) make delete project work with event delegation;
 // (done) add modals or input way for project
 // (done) add input for todo 
 // render project title too on todo page
@@ -191,6 +204,7 @@ export { TodoController }
 // local storage and
 // (done) date functionality (need to read docs) (tough)
 // filter options e_e
+// responsiveness
 
 // some possible bugs
 // what if u delete the selected project -> could sent empty item for 
@@ -200,4 +214,4 @@ export { TodoController }
 // project name not being edited (fixed);
 // select class being deleted or not added (fixed)
 // selected class having 2 elements in it somehow (fixed);
-// adding project after deleting somehow adding  1 more element
+// adding project after deleting somehow adding  1 more element (fixed, splice typo);

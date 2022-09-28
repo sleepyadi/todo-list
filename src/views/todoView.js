@@ -7,7 +7,7 @@
 // could just use a on page input for task and project
 // modal for edit button emits todoEdit
 import { Modal } from "../utils/modal";
-import {isFuture, isEqual, formatDistanceToNow } from 'date-fns';
+import { isFuture, isEqual, formatDistanceToNow } from 'date-fns';
 
 class TodoView {
     constructor({title, desc, dueDate, priority, completed = false, id}) {
@@ -58,6 +58,14 @@ class TodoView {
         elements.forEach((element) => {
             this.todo.appendChild(element);
         })
+
+        if (this.priority === 1) {
+            this.todo.classList.add('priority-low');
+        } else if (this.priority === 2) {
+            this.todo.classList.add('priority-medium');
+        } else if (this.priority === 3) {
+            this.todo.classList.add('priority-high');
+        }
         
         return this.todo;
     }
