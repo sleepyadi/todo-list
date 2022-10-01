@@ -56,11 +56,11 @@ class TodoView {
             this.todo.appendChild(element);
         })
 
-        if (this.priority === 1) {
+        if (this.priority === "1") {
             this.todo.classList.add('priority-low');
-        } else if (this.priority === 2) {
+        } else if (this.priority === "2") {
             this.todo.classList.add('priority-medium');
-        } else if (this.priority === 3) {
+        } else if (this.priority === "3") {
             this.todo.classList.add('priority-high');
         }
         

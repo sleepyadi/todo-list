@@ -18,6 +18,8 @@
   --medium-black: #292826;
   --light-black: #151515;
   --title-gold: #FBC403;
+  --light-green: #DAFFD5;
+  --light-red: #FA6B84;
 }
 
 body {
@@ -45,27 +47,33 @@ body {
 
 .btn {
   padding: 0.5em 1em;
-  outline: none;
-}
-
-
-.svg-button {
   border: none;
   outline: 1px solid rgba(0,0,0,0.2);
+  border-radius: 50%;
+  transition: all ease-in-out 200ms;
+}
+
+.btn:hover {
+  box-shadow: 0 4px 2px #888888;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.svg-button {
+  
   width: 2rem;
   height: 2rem;
   background-repeat: no-repeat;
   background-color: var(--white);
   background-position: center;
   background-size: 75%;
-  border-radius: 50%;
-  transition: all ease-in-out 200ms;
+  
 }
 
-.svg-button:hover {
-  box-shadow: 0 4px 2px #888888;
-  transform: translateY(-2px);
-}
 
 .controller-title {
   text-align: center;
@@ -242,9 +250,16 @@ main {
 }
 
 .todo__delete {
-  background-image: url('../assets/information-outline.svg');
+  background-image: url('../assets/delete.svg');
 }
 
+.todo.priority-medium {
+  background-color: var(--light-green);
+}
+
+.todo.priority-high {
+  background-color: var(--light-red);
+}
 
 
 
