@@ -8,7 +8,7 @@ import { ProjectView } from "../views/projectView";
 class ProjectController {
     constructor(element, title) {
         this.container = document.querySelector(element);
-        this.projects = [];
+        this.projects = this.loadFromLocal() || [];
         this.title = title;
         // this.counter = this.projects.length;
         this.projectList = document.createElement('div');
@@ -43,6 +43,9 @@ class ProjectController {
         this.container.appendChild(titleElement);
         this.container.appendChild(projectInputDiv);
         this.container.appendChild(this.projectList);
+
+        //render projects at start
+        this.renderProjects();
     }
 
     addProject() {
@@ -52,7 +55,7 @@ class ProjectController {
         // this.counter = this.proj/ects.length + 1;
         this.projects.push(newProject);
         this.renderProjects();
-        
+        this.updateLocal();
     }
 
     renderProjects() {
@@ -123,6 +126,7 @@ class ProjectController {
             }
         }
         eventManager.emit('selectProject', this.selectedProject);
+        this.updateLocal();
     }
 
     updateProjectInfo(obj) {
@@ -140,6 +144,7 @@ class ProjectController {
         console.log(this.projects);
         this.renderProjects();
         eventManager.emit('selectProject', this.selectedProject);
+        this.updateLocal();
     }
 
     deleteProject(element) {
@@ -155,6 +160,19 @@ class ProjectController {
             this.selectedProject = '';
             eventManager.emit('selectProject', this.selectedProject);
         }
+        this.updateLocal();
+    }
+
+    loadFromLocal() {
+        if (window.localStorage.getItem('projects')) {
+            return JSON.parse(window.localStorage.getItem('projects'));
+        } else {
+            return false;
+        }
+    }
+
+    updateLocal() {
+        window.localStorage.setItem('projects', JSON.stringify(this.projects));
     }
 }
 
