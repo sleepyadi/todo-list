@@ -36,8 +36,7 @@ class TodoView {
         title.classList.add('todo__title');
 
         const detailsBtn = document.createElement('button');
-        detailsBtn.setAttribute('class', 'btn todo__details')
-        detailsBtn.textContent = 'details';
+        detailsBtn.setAttribute('class', 'btn todo__details svg-button');
         detailsBtn.addEventListener('click', this.handleDetails.bind(this));
 
         const dueDate = document.createElement('p');
@@ -45,13 +44,11 @@ class TodoView {
         dueDate.classList.add('todo__due');
 
         const editBtn = document.createElement('button');
-        editBtn.setAttribute('class', 'btn todo__edit')
-        editBtn.textContent = 'edit';
+        editBtn.setAttribute('class', 'btn todo__edit svg-button')
         editBtn.addEventListener('click', this.handleEdit.bind(this));
 
         const deleteBtn = document.createElement('button')
-        deleteBtn.setAttribute('class', 'btn todo__delete');
-        deleteBtn.textContent = 'delete';
+        deleteBtn.setAttribute('class', 'btn todo__delete svg-button');
 
         const elements = [todoCheck, title, detailsBtn, dueDate, editBtn, deleteBtn];
 

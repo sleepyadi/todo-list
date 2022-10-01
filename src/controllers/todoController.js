@@ -201,13 +201,9 @@ class TodoController {
 export { TodoController }
 
 //TODO
+// styling for buttons
 // maybe add label/tags for todo input
 // (done) priority color
-// (done) make delete project work with event delegation;
-// (done) add modals or input way for project
-// (done) add input for todo 
-// (done) render project title too on todo page
-// (done) make todo complete and delete button work
 // add styling and images (can do this before local storage probs)
 // local storage and
 // (done) date functionality (need to read docs) (tough)

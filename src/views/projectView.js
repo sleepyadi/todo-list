@@ -18,14 +18,12 @@ class ProjectView {
         this._element.appendChild(projectName);
 
         const editBtn = document.createElement('button');
-        editBtn.classList.add('project__edit');
-        editBtn.textContent = 'edit';
+        editBtn.setAttribute('class', 'btn project__edit svg-button');
         editBtn.addEventListener('click', this.handleEdit.bind(this));
         this._element.appendChild(editBtn);
 
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('project__delete');
-        deleteBtn.textContent = 'delete';
+        deleteBtn.setAttribute('class', 'btn project__delete svg-button');
         this._element.appendChild(deleteBtn);
 
         return this._element;

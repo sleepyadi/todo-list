@@ -21,13 +21,13 @@
 }
 
 body {
+  background-color: #ececec;
   min-height: 100vh;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas: "header header"
                        "sidebar main";
-  grid-gap: 1rem;
 }
 
 @media only screen and (max-width: 600px) {
@@ -46,6 +46,25 @@ body {
 .btn {
   padding: 0.5em 1em;
   outline: none;
+}
+
+
+.svg-button {
+  border: none;
+  outline: 1px solid rgba(0,0,0,0.2);
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-color: var(--white);
+  background-position: center;
+  background-size: 75%;
+  border-radius: 50%;
+  transition: all ease-in-out 200ms;
+}
+
+.svg-button:hover {
+  box-shadow: 0 4px 2px #888888;
+  transform: translateY(-2px);
 }
 
 .controller-title {
@@ -70,8 +89,10 @@ input:focus {
 }
 
 
+
 /* -------------- HEADER -------------- */
 header {
+  background-color: var(--white);
   grid-area: header;
   text-align: center;
   padding: 1em;
@@ -79,15 +100,19 @@ header {
 
 /* -------------- SIDEBAR -------------- */
 .project-sidebar {
+  background-color: var(--white);
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  padding: 0 1em;
+  padding: 1em 1em;
+  margin: 1rem;
+  border-radius: 8px;
 }
 
 .project-input-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 1rem;
 }
@@ -135,6 +160,11 @@ header {
 
 .project__edit {
   margin-left: auto;
+  background-image: url('../assets/pencil.svg');
+}
+
+.project__delete{
+  background-image: url('../assets/delete.svg');
 }
 
 .project.selected {
@@ -155,11 +185,14 @@ header {
 
 /* -------------- MAIN -------------- */
 main {
+  background-color: var(--white);
   grid-area: main;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  padding: 0 1em;
+  padding: 1em 1em;
+  margin: 1rem;
+  border-radius: 8px;
 
 }
 
@@ -191,6 +224,7 @@ main {
 .todo {
   background-color: #ececec;
   border-radius: 5px;
+  box-shadow: 3px 3px 5px #888888;
   display: flex;
   flex-direction: row;
   gap: 2rem;
@@ -200,6 +234,15 @@ main {
 
 .todo__details {
   margin-left: auto;
+  background-image: url('../assets/information-outline.svg');
+}
+
+.todo__edit {
+  background-image: url('../assets/pencil.svg');
+}
+
+.todo__delete {
+  background-image: url('../assets/information-outline.svg');
 }
 
 
