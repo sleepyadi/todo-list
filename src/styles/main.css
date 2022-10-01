@@ -189,6 +189,8 @@ main {
 }
 
 .todo {
+  background-color: #ececec;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   gap: 2rem;
