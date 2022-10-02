@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Todo List</title>
+<script defer src="runtime.js"></script><script defer src="bundle.js"></script></head>
+<body>
+    <header class="header">
+        <h1 class="header__title">Todo List</h1>
+    </header>
+    <div class="project-sidebar"></div>
+    <main class="todo-main"></main>
+    
+</body>
+<div class="modal msg-modal"></div>
+<div id="overlay"></div>
+<form action="" class="modal" id="edit-todo-modal">
+        <!-- <label for="completed">Completed: 
+            <input type="checkbox" name="completed" id="completed">
+        </label> -->
+        <label for="title">Title:
+            <input type="text" name="title" id="title">
+        </label>
+        <label for="desc">Description: 
+            <input type="text" name="desc" id="desc">
+        </label>
+        <label for="due-date">Due Date:
+            <input type="date" name="dueDate" id="due-date">
+        </label>
+        <label for="priority">Priority Level:
+            <input type="number" min="1" max="3" name="priority" id="priority">
+        </label>
+
+        <button type="submit"> Submit </button>
+</form>
+<form action="" class="modal" id="edit-project-modal">
+    <label for="project-name"> Name:
+        <input type="text" name="name" id="project-name">
+    </label>
+    <button type="submit"> Submit </button>
+</form>
+</html>
