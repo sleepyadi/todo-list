@@ -1,6 +1,3 @@
-// controller responsible for creation of projects
-// and also deletion via event delegation
-// not sure wether to use event delegation for selection as well or add that to view itself
 import { Project } from "../models/project";
 import { eventManager } from "../utils/eventManager";
 import { ProjectView } from "../views/projectView";

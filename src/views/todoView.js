@@ -1,11 +1,3 @@
-// desc = button with modal for the entire text (i) type of button
-// dueDate = need to use a lib to convert time into dueDate - now
-// priority = 1-5 maybe ? or 1-3 used for sorting maybe
-// completed is just a tick input
-// probably could use event delegation for edit and delete on controller 
-// instead of view
-// could just use a on page input for task and project
-// modal for edit button emits todoEdit
 import { Modal } from "../utils/modal";
 import { isFuture, isEqual, formatDistanceToNow } from 'date-fns';
 

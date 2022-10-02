@@ -1,8 +1,3 @@
-// maintains the list and adds todo (only active when a project is selected)
-// listens for projectSelected event and renders the project and todos 
-// emits projectUpdate on edit-todo or add-todo
-// might not even need id's if i make proper use of "selected" tag
-// on project reciever -> populate todos -> sort -> render
 import { Todo } from "../models/todo";
 import { eventManager } from "../utils/eventManager";
 import { Modal } from "../utils/modal";
@@ -203,19 +198,5 @@ export { TodoController }
 //TODO
 // styling for buttons
 // maybe add label/tags for todo input
-// (done) priority color
-// add styling and images (can do this before local storage probs)
-// local storage and
-// (done) date functionality (need to read docs) (tough)
 // filter options e_e
-// responsiveness
-
-// some possible bugs
-// what if u delete the selected project -> could sent empty item for 
-// false bool check
-
-//bug to fix
-// project name not being edited (fixed);
-// select class being deleted or not added (fixed)
-// selected class having 2 elements in it somehow (fixed);
-// adding project after deleting somehow adding  1 more element (fixed, splice typo);
+// responsiveness (somewhat done)

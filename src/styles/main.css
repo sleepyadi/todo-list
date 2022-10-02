@@ -215,7 +215,7 @@ main {
   font-weight: bold;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1025px) {
   .todo-input-container {
     display: flex;
     flex-direction: column;
