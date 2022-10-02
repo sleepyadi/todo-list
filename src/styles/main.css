@@ -4,7 +4,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 :root { 
@@ -82,7 +82,7 @@ body {
 
 input {
   padding: 0.5em;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -247,7 +247,7 @@ main {
   box-shadow: 3px 3px 5px #888888;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.8rem;
   padding: 1.2em 1em;
   align-items: center;
 }
@@ -278,6 +278,7 @@ main {
 /* -------------- MODAL -------------- */
 
 .modal {
+  padding: 1rem 2rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -287,7 +288,7 @@ main {
   border-radius: 10px;
   z-index: 10;
   background-color: white;
-  width: 500px;
+  width: max-content;
   max-width: 80%;
 }
 
@@ -312,3 +313,29 @@ main {
   opacity: 1;
   pointer-events: all;
 }
+
+.modal button {
+  align-self: center;
+  padding: 0.4em 1em;
+}
+
+/* -------------- MODAL SPECIFIC -------------- */
+#edit-todo-modal, #edit-project-modal {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.8rem;
+
+}
+
+#edit-todo-modal label {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
+  text-align: center;
+}
+
+.msg-modal {
+  overflow-wrap: break-word;
+}
+
+

@@ -200,3 +200,6 @@ export { TodoController }
 // maybe add label/tags for todo input
 // filter options e_e
 // responsiveness (somewhat done)
+// style modals
+// could use textarea for description
+// either fix priority value or change it to a drop down
