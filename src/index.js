@@ -13,4 +13,3 @@ todoContainer.init();
 // maybe add label/tags for todo input
 // filter options e_e
 // could use textarea for description
-// either fix priority value or change it to a drop down
