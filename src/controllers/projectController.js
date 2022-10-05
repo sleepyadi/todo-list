@@ -1,3 +1,4 @@
+import { add } from "date-fns";
 import { Project } from "../models/project";
 import { eventManager } from "../utils/eventManager";
 import { ProjectView } from "../views/projectView";
@@ -20,21 +21,23 @@ class ProjectController {
         titleElement.classList.add('controller-title');
         titleElement.textContent = this.title;
 
-        const projectInputDiv = document.createElement('div');
-        projectInputDiv.classList.add('project-input-container')
+        const projectInputDiv = document.createElement('form');
+        projectInputDiv.setAttribute('id', 'project-input-container')
 
         this.projectInput = document.createElement('input');
-        this.projectInput.classList.add('project-input')
+        this.projectInput.setAttribute('id', 'project-input');
+        this.projectInput.required = true;
         this.projectInput.placeholder = 'Enter Project Name';
         projectInputDiv.appendChild(this.projectInput);
 
         const addBtn = document.createElement('button');
         addBtn.setAttribute('class', 'btn add-project-btn');
+        addBtn.type = 'submit';
         addBtn.textContent = ' + ';
         projectInputDiv.appendChild(addBtn);
 
         // listeners
-        addBtn.addEventListener('click', this.addProject.bind(this));
+        projectInputDiv.addEventListener('submit', this.addProject.bind(this));
         this.projectList.addEventListener('click', this.selectProject.bind(this));
 
         this.container.appendChild(titleElement);
@@ -45,11 +48,11 @@ class ProjectController {
         this.renderProjects();
     }
 
-    addProject() {
+    addProject(e) {
         // maybe on add button open modal and on modal submit emit event to add the view and project
+        e.preventDefault();
         const projectName = this.projectInput.value || 'Untitled';
         const newProject = new Project(projectName, 'proj-' + Date.now());
-        // this.counter = this.proj/ects.length + 1;
         this.projects.push(newProject);
         this.renderProjects();
         this.updateLocal();
@@ -76,7 +79,6 @@ class ProjectController {
 
     selectProject(event) {
         // this is event bubbling from edit btn
-        console.log(event.target);
         const isProject = event.target.getAttribute('class').includes('project');
         const hasProjId = event.target.hasAttribute('data-id');
         const isEditBtn = event.target.getAttribute('class').includes('project__edit');
@@ -84,10 +86,8 @@ class ProjectController {
         const isDeleteBtn = event.target.getAttribute('class').includes('project__delete');
 
         if (isProject && hasProjId) {
-            console.log('project click')
             this.selectElement(event.target);
         } else if (isEditBtn || isTitle) {
-            console.log('child click');
             this.selectElement(event.target.parentElement);
         } else if (isDeleteBtn) {
             this.deleteProject(event.target.parentElement);
@@ -138,7 +138,6 @@ class ProjectController {
                 break; // this was breaking the loop ;-;
             }   
         }
-        console.log(this.projects);
         this.renderProjects();
         eventManager.emit('selectProject', this.selectedProject);
         this.updateLocal();

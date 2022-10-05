@@ -110,8 +110,6 @@ class TodoController {
     }
 
     render(project) {
-        console.log('received in todo',project);
-        console.log('hi this is from selectProject event in todocontroller')
         // this overwrites the main object, probs should send a copy
         if (project) {
             this.selectedProject = project;
