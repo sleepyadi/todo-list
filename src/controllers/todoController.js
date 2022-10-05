@@ -22,55 +22,75 @@ class TodoController {
         titleElement.classList.add('controller-title');
         titleElement.textContent = this.title;
 
-        const todoInputDiv = document.createElement('div');
-        todoInputDiv.classList.add('todo-input-container');
+        const todoInputForm = document.createElement('form');
+        todoInputForm.setAttribute('id', 'todo-input-container');
 
         this.todoTitleInput = document.createElement('input');
         this.todoTitleInput.placeholder = 'Enter Todo Title';
         this.todoTitleInput.classList.add('todo-title-input');
-        todoInputDiv.appendChild(this.todoTitleInput);
+        this.todoTitleInput.required = true;
+        todoInputForm.appendChild(this.todoTitleInput);
 
         this.todoDescInput = document.createElement('input');
         this.todoDescInput.placeholder = 'Enter Todo Details';
         this.todoDescInput.classList.add('todo-desc-input');
-        todoInputDiv.appendChild(this.todoDescInput)
+        this.todoDescInput.required = true;
+        todoInputForm.appendChild(this.todoDescInput)
+
+        const dueLabel = document.createElement('label');
+        dueLabel.textContent = 'Due: '
+        todoInputForm.appendChild(dueLabel);
 
         this.todoDueInput = document.createElement('input');
         this.todoDueInput.type = 'date';
         this.todoDueInput.valueAsDate = add(new Date(), { days: 3});
         this.todoDueInput.classList.add('todo-dueDate-input')
-        todoInputDiv.appendChild(this.todoDueInput);
+        todoInputForm.appendChild(this.todoDueInput);
 
-        this.todoPriorityInput = document.createElement('input');
-        this.todoPriorityInput.type = 'number';
+
+        const priorityLabel = document.createElement('label');
+        priorityLabel.textContent = 'Priority: '
+        todoInputForm.appendChild(priorityLabel);
+
+        this.todoPriorityInput = document.createElement('select');
+        const options = ['Low', 'Medium', 'High'];
+       
+        for (let i = 0; i < options.length; i++) {
+            const option = document.createElement('option');
+            option.value = i + 1;
+            option.textContent = options[i];
+            this.todoPriorityInput.appendChild(option);
+       
+        }
         this.todoPriorityInput.classList.add('todo-priority-input');
-        this.todoPriorityInput.min = '1';
-        this.todoPriorityInput.max = '3';
         this.todoPriorityInput.value = '1';
-        todoInputDiv.appendChild(this.todoPriorityInput);
+        todoInputForm.appendChild(this.todoPriorityInput);
 
         const addTodoBtn = document.createElement('button');
+        addTodoBtn.type = 'submit';
         addTodoBtn.setAttribute('class', 'btn add-todo-btn');
         addTodoBtn.textContent = ' + ';
         
         //event Listeners
-        addTodoBtn.addEventListener('click', this.addTodo.bind(this));
+        todoInputForm.addEventListener('submit', this.addTodo.bind(this));
         this.todoList.addEventListener('click', this.handleTodoClick.bind(this));
-        todoInputDiv.appendChild(addTodoBtn);
+        todoInputForm.appendChild(addTodoBtn);
 
         this.projectTitle = document.createElement('h2');
         this.projectTitle.classList.add('selected-project-title');
         this.projectTitle.textContent = "Project Name";
 
         this.container.appendChild(titleElement);
-        this.container.appendChild(todoInputDiv);
+        this.container.appendChild(todoInputForm);
         this.container.appendChild(this.projectTitle);
         this.container.appendChild(this.todoList);
         this.renderTodoList();
     }
 
-    addTodo() {
+    addTodo(e) {
         // could use same idea as proj added with modal and event emit probs
+        e.preventDefault();
+
         if (this.selectedProject) {
             const todoTitle = this.todoTitleInput.value || 'Untitled';
             const todoDesc =  this.todoDescInput.value || 'Untitled';

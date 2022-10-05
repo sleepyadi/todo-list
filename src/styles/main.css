@@ -80,7 +80,7 @@ body {
   color: var(--white);
 }
 
-input {
+input, select {
   padding: 0.5em;
   font-size: 1rem;
   border-radius: 5px;
@@ -89,7 +89,7 @@ input {
   background-color: #ececec;
 }
 
-input:focus {
+input:focus, select:focus {
   outline: 3px solid black;
 }
 
@@ -201,12 +201,16 @@ main {
 
 }
 
-.todo-input-container {
+#todo-input-container {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  align-items: center;
 }
 
+#todo-input-container label {
+  text-align: center;
+}
 
 
 .btn.add-todo-btn {
@@ -216,9 +220,10 @@ main {
 }
 
 @media only screen and (max-width: 1025px) {
-  .todo-input-container {
+  #todo-input-container {
     display: flex;
     flex-direction: column;
+    align-items: normal;
   }
 
   .btn.add-todo-btn {

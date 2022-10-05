@@ -17,7 +17,7 @@ A todo list app made with vanilla js (and webpack for bundling) after learning a
 ## TODO:
 - ~~add styling~~
 - ~~add images~~
-- make the input area more verbose (priority level)
+- ~~make the input area more verbose (priority level)~~
 - clean some parts of code (specially controllers)
 - add filter options
 - maybe redo the project again someday after learning more about clean code and mvc
